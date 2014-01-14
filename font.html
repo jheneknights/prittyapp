@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <meta name="description" content=" "/>
+    <meta name="keywords" content=" "/>
+
+    <title>Detect Font loading</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" type="image/png" href=""/>
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+
+    <link rel="stylesheet" href=""/>
+
+    <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src=""></script>
+    <style>
+        @font-face {
+            font-family: "LavYa";
+            src: local('LavYa'), local('LavYa'), url('./fonts/MedievalSharp.ttf') format('truetype');
+            font-weight: normal;
+        }
+        .LavYa{font-family: "LavYa"; font-size: 2em; font-weight: normal}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+</div>
+
+<img id="image" style="display: none" />
+
+<style>
+    .container{width: 95%; margin: auto; height: 15px;}
+    .progress-bar{width: 100%; height: 100%; padding: 1px; margin: 0; border: #666 solid 2px;
+        border-radius: 5px}
+    .progress{
+        width: 45%; height: 100%;
+        border-radius: 2.5px;
+        background: #ff3019; /* Old browsers */
+        background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+    }
+</style>
+
+<script>
+    /*$(function() {
+
+        var options = {
+            fontName: "LavYa",
+            fontFile: "./fonts/MedievalSharp.ttf",
+            fontWeight: "normal",
+            fontSize: "2em"
+        }
+
+        $(window).load(function() {
+            var font = $.getJSON(options.fontFile)
+                    .always(function() {
+                        fontFace = [
+                            "@font-face {",
+                            "\tfont-family: \"" + options.fontName + "\";",
+                            "\tsrc: local('" + options.fontName + "'), local('" + options.fontName + "'), url('" + options.fontFile + "') format('truetype');",
+                            "\tfont-weight: " + options.fontWeight + ";",
+                            "}",
+                            "." + options.fontName.replace(' ', '') + '{font-family: "' + options.fontName + '"; font-size: ' + options.fontSize + '; font-weight: ' + options.fontWeight + '}'
+                        ].join("\n");
+                        console.log( "complete" );
+
+                        //$('body').append('<style>' + fontFace + '</style>')
+                        //$('h3').addClass(options.fontName.replace(' ', ''))
+                    });
+
+        })
+    })*/
+
+$(function() {
+    $(window).load(function() {
+        var img = document.getElementById("image");
+        img.onload = function() {
+            console.log("width: " + $(img).width())
+        }
+        img.src = "./gallery/pritty (16).png";
+    })
+})
+</script>
+</body>
+</html>

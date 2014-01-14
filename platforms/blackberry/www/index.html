@@ -1,0 +1,450 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="description" content=" " />
+    <meta name="keywords" content=" " />
+
+    <title></title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="shortcut icon" type="image/x-icon" href="" />
+
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/jquery.sidr.light.css" />
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="./css/jquery.minicolors.css" />
+
+    <!-- basic neccessity -->
+    <script type="text/javascript" src="http:///localhost/webworks.js"></script>
+    <script type="text/javascript" src="./js/cordova-2.5.0.js"></script>
+
+    <!-- Apps initialisation requirements -->
+    <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+
+
+    <!-- phonegap plugins (joint) for canvas manipulations
+    <script type="text/javascript" src="./js/phoneGapPluginsConcat.js"></script>
+     -->
+
+    <!-- App running script -->
+    <script type="text/javascript" src="./js/prittynoteAppManager.js"></script>
+    <script type="text/javascript" src="./js/canvas-toBlob.min.js"></script>
+
+    <!-- top dependencies -->
+    <script type="text/javascript" src="./js/jquery.fontface.js"></script>
+    <script type="text/javascript" src="./js/jquery.hammer.min.js"></script>
+
+    <!-- App UI/UX flow helpers -->
+    <script type="text/javascript" src="./js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="./js/iscroll.js"></script>
+    <script type="text/javascript" src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <style></style>
+
+</head>
+
+<body>
+
+    <div class="app-content">
+        <div class="content" id="content">
+            <div class="header red-bg white">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="images/theme-mid.png">
+                        </td>
+                        <td class="name">
+                            <div>PrittyNote</div>
+                        </td>
+                        <td id="app-share">
+                            <img src="images/icons/social/appbar.share.png">
+                        </td>
+                        <td id="app-help">
+                            <img src="images/appbar.question.png">
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="header-progress">
+                    <div class="activity-progress"></div>
+                </div>
+
+                <div class="activity-bar">
+                    <div id="imagepath" class="activity">letters: 175 | words: 31 | width: ---</div>
+                </div>
+            </div>
+
+            <!-- The PrittNote canvas container -->
+            <div class="canvas-container">
+                <canvas id="prittynote" style="border: 2px solid grey"></canvas>
+            </div>
+        </div>
+
+        <!-- fonts and themes are pre-populated here before moved to sidebars -->
+        <div class="app-options">
+            <div class="side-bar-themes utility">
+                <ul id="themes"></ul>
+            </div>
+            <div class="side-bar-fonts utility">
+                <ul id="fonts"></ul>
+            </div>
+        </div>
+
+        <!--- the text area where the user inputs his text -->
+        <div class="text-area">
+            <div class="pop-header red-bg white">
+                <div data-action="ok-edit" class="buttons">
+                    <img class="app-icon" src="./images/icons/appbar.checkmark.thick.png">
+                </div>
+                <div data-action="help" class="buttons">
+                    <img src="images/appbar.question.png">
+                </div>
+                <div data-action="status-share" class="buttons">
+                    <img class="app-icon" src="./images/appbar.list.star.png">
+                </div>
+                <div data-action="none" class="spacer">&nbsp;</div>
+                <div data-action="cancel-edit" class="buttons">
+                    <img src="./images/icons/appbar.clear.inverse.reflect.horizontal.png">
+                </div>
+            </div>
+            <div class="edit-container">
+                <textarea id="input-text" name="text">Hi, im an example #note, edit the note, control the colors of the bground, text, #hash or @mention tags below, also change fonts and font size. ##Or even add your own images as background and share :)
+                </textarea>
+            </div>
+            <div class="finish-edit">
+                <a data-action="cancel" class="cancel-edit red-bg white">Cancel</a>
+                <a data-action="done" class="done-edit green-bg white">Done</a>
+            </div>
+        </div>
+
+        <!-- STATUS SHARE INTERGRATION -->
+        <div data-action="status-search" class="status-search pop-up">
+            <table class="search-bar red-bg">
+                <tr>
+                    <td data-action="status-search" class="close">
+                        <img src="images/icons/appbar.close.png">
+                    </td>
+                    <td data-action="none" class="spacer">
+                        <input id="status-search" value="" name="status-search" data-keyword="">
+                    </td>
+                    <td data-action="search">
+                        <img src="images/icons/appbar.magnify.png">
+                    </td>
+                    <td data-action="random">
+                        <img src="images/appbar.shuffle.png">
+                    </td>
+                </tr>
+            </table>
+            <div data-default="Search for wise, cool, funny or sarcastic quotes or sayings and create a PrittyNote from it. :)" data-random="Fetching random quotes and statuses" data-note="DOUBLETAP on the update you want" class="status-activity black-bg white small-padding">
+                Search for wise, cool, funny or sarcastic quotes or sayings and create a PrittyNote from it. :)
+            </div>
+            <div id="search-wrapper">
+                <div class="scroll">
+                    <ul id="stuff"></ul>
+                    <div class="status-footer counter" data-id="app-counter">
+                        <h3>need a status to update?
+                            <br/>we've got
+                            <span class="ftcounter">thousands</span>statuses for you to chose from.<a class="green-bg white small-padding" href="https://play.google.com/store/apps/details?id=com.statusshare"> Download  StatusShare</a> 
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/statusSharePlugin.js"></script>
+
+
+        <!-- SAVING AND SHARING OPTION -->
+        <div data-action="save" class="app-save app-mini-pop-up pop-up">
+            <table class="intro-bar">
+                <tr>
+                    <td data-action="save" class="close">
+                        <img src="images/icons/appbar.chevron.left.png">
+                    </td>
+                    <td class="spacer">&nbsp;</td>
+                    <td data-action="save" class="close">
+                        <img src="images/icons/appbar.close.png">
+                    </td>
+                </tr>
+            </table>
+            <div class="saving-options">
+                <div class="blue-bg white" data-action="save">
+                    <img src="images/appbar.save.png">Just Save
+                </div>
+                <div class="green-bg white" data-action="save-share">
+                    <img src="images/icons/social/appbar.share.png">Save & Share
+                </div>
+            </div>
+        </div>
+
+        <!-- BACKGROUND IMAGE OPTIONS -->
+        <div data-action="cmr-gallery" class="app-cmr-gallery app-mini-pop-up pop-up">
+            <table class="intro-bar">
+                <tr>
+                    <td data-action="cmr-gallery" class="close">
+                        <img src="images/icons/appbar.chevron.left.png">
+                    </td>
+                    <td class="spacer">&nbsp;</td>
+                    <td data-action="cmr-gallery" class="close">
+                        <img src="images/icons/appbar.close.png">
+                    </td>
+                </tr>
+            </table>
+            <div class="image-loading-options">
+                <div class="black-bg white small-padding" data-action="none">
+                    NOTE: Make sure what you want to show in the background is around the center of your photo/image
+                </div>
+                <div class="blue-bg white" data-action="camera">
+                    <img src="images/appbar.camera.png">Take a picture
+                </div>
+                <div class="green-bg white" data-action="gallery">
+                    <img src="images/appbar.image.multiple.png">Pick from gallery
+                </div>
+                <div class="pale-red white" data-action="remove-image">
+                    <img src="images/icons/appbar.close.png">Remove Background Image
+                </div>
+            </div>
+        </div>
+
+        <!-- APP INTRODUCTION TIPS AND TRICKS -->
+        <div data-action="intro" class="introduction pop-up">
+            <table class="intro-bar">
+                <tr>
+                    <td data-action="intro" class="close">
+                        <img src="images/icons/appbar.chevron.left.png">
+                    </td>
+                    <td class="spacer">&nbsp;</td>
+                    <td data-action="intro" class="close">
+                        <img src="images/icons/appbar.close.png">
+                    </td>
+                </tr>
+            </table>
+            <div class="intro-content" id="intro-content">
+                <div id="scroll">
+                    <div>
+                        <h3>DOUBLE TAP SCREEN</h3>
+                        <p>To bring up the editing box</p>
+                    </div>
+
+                    <div>
+                        <h3>WHEN EDITING...</h3>
+                        <p>use
+                            <span># or @</span>next to any word to to highlight/make the word.</p>
+                        <p>use
+                            <span>##</span>(double hashtag) to highlight all the word that will come after it.</p>
+                        <p>
+                            <span>note:</span>the
+                            <span># or ##</span>(hashtag) is removed in the prittynote,
+                            <span>@</span>is not.</p>
+                    </div>
+
+                    <div>
+                        <h3>TAP and HOLD ON NOTE (2 seconds)</h3>
+                        <p>To re-align the position of the text on your prittynote</p>
+                    </div>
+
+                    <div>
+                        <h3>SWIPE LEFT ON SCREEN</h3>
+                        <p>To bring the fonts menu into view</p>
+
+                        <h3>SWIPE RIGHT ON SCREEN</h3>
+                        <p>To bring the themes menu into view</p>
+                    </div>
+
+                    <div>
+                        <h3>350</h3>
+                        <p>Maximum characters allowed to qualify as a PrittyNote.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay blind"></div>
+
+        <!-- APP'S NAVIGATIONAL MENU -->
+        <div class="footer footer-menu">
+            <div class="font-control">
+                <table>
+                    <tr>
+                        <td class="one">
+                            <div class="input-range font-touch">
+                                <div class="range-progress-bar">
+                                    <div class="input-handler"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="two">
+                            <input type="text" value="28" min="20" max="75" step="1" class="font-range-input">
+                        </td>
+                        <td class="two">
+                            <div class="close-font-slider">
+                                <img src="./images/appbar.close.png">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footer-icon-menu">
+                <a data-action="edit" class="write blue-bg white">
+                    <img class="app-icon" src="./images/appbar.edit.png">
+                </a>
+                <a data-action="theme" class="write red-bg white">
+                    <img class="app-icon" src="./images/appbar.draw.brush.reflection.png">
+                </a>
+                <a data-action="add-image" class="add-image orange-bg white">
+                    <img class="app-icon" src="./images/appbar.image.hdr.png">
+                </a>
+                <a data-action="font-size" class="preview purple-bg white">
+                    <img class="app-icon" src="./images/appbar.text.size.up.png">
+                </a>
+                <a data-action="font" class="write blue-bg white">
+                    <img class="app-icon" src="./images/appbar.text.serif.png">
+                </a>
+                <a data-action="download" class="save-image green-bg white" target="_blank" download="prittynote.png">
+                    <img class="app-icon" src="./images/appbar.save.png">
+                </a>
+            </div>
+        </div>
+
+        <!-- EDITING OF THE IMAGE SELECTED -->
+        <div class="load-image">
+            <img id="bg-image" src="" />
+            <div class="finish-crop">
+                <img src="images/icons/appbar.close.png">
+                <img src="images/icons/appbar.checkmark.thick.png">
+            </div>
+        </div>
+
+        <!-- FOR EDITING CUSTOM THEMES -->
+        <div data-action="color-picker" class="color-options app-mini-pop-up pop-up">
+            <table class="intro-bar">
+                <tr>
+                    <td data-action="color-picker" class="close">
+                        <img src="images/icons/appbar.chevron.left.png">
+                    </td>
+                    <td class="spacer">&nbsp;</td>
+                    <td data-action="color-picker" class="close">
+                        <img src="images/icons/appbar.close.png">
+                    </td>
+                </tr>
+            </table>
+            <div class="color-options">
+                <div class="blue-bg white" data-action="themes">
+                    <img src="images/appbar.draw.brush.reflection.png">Choose from Themes
+                </div>
+                <div class="green-bg white" data-action="custom">
+                    <img src="images/appbar.draw.pencil.reflection.png">Select your own colors
+                </div>
+            </div>
+        </div>
+
+        <!-- CANVAS CUSTOM COLOR EDITOR -->
+        <div id="custom-colors" class="color-picker">
+            <div class="finish-color-edit">
+                <img data-action="cancel-edit" src="images/icons/appbar.close.png">
+                <img data-action="done-edit" src="images/icons/appbar.checkmark.thick.png">
+                <img data-action="show-fonts" src="images/appbar.text.serif.png">
+            </div>
+            <div class="clone-canvas" data-default="prittynote">
+                <!-- put cloned canvas -->
+            </div>
+            <div class="color-parts">
+                <div class="color-input">
+                    <input id="color-picker" value="#cc0000" data-value="" name="color picker">
+                </div>
+                <div class="color-choices">
+                    <div data-color="" data-rel="background">Background</div>
+                    <div data-color="" data-rel="text">Text</div>
+                    <div data-color="" data-rel="hash-tag">HashTags</div>
+                </div>
+                <div class="green">
+                    <p>Tap either to select then edit it's color</p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/jquery.minicolors.js"></script>
+        <script>
+            $(window).load(function() {
+                $('#color-picker').minicolors({
+                    theme: "bootstrap",
+                    position: "top",
+                    textfield: true,
+                    change: function(hex, opacity) {
+                        var hex = hex.replace("#", '');
+                        AppFunctions.color.picker.data("color", hex);
+                        $('input[data-color="' + AppFunctions.color.picker.data("rel") + '"]').val(hex);
+                        setTimeout(prittyNote.drawCanvas(prittyNote.getValue()), 0);
+                    }
+                });
+            })
+        </script>
+
+        <!-- this will control the color flow of the prittynote, it is hidden -->
+        <div class="color-inputs" style="visibility: hidden">
+            <input type="text" data-color="background" id="bgclr" class="color" value="ffff8c" name="background">
+            <input type="text" data-color="text" id="text" class="color" value="666666" name="myText">
+            <input type="text" data-color="hash-tag" id="hashtag" class="color" value="cc0000" name="hashtags" />
+        </div>
+
+        <div class="loading">
+            <div class="loading-container">
+                <div class="logo">
+                    <h1 class="white">PrittyNote</h1>
+                    <p>Loading...</p>
+                </div>
+                <div class="container">
+                    <div class="progress-bar">
+                        <div class="show-app-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Dependencies -->
+        <script type="text/javascript" src="./js/jquery.sidr.min.js"></script>
+        <script type="text/javascript" src="./js/range.input.js"></script>
+    </div>
+
+    <script>
+        //check when App is fully initiated
+        document.addEventListener('webworksready', onDeviceReady, false)
+
+         //when everything in  cordova is ready
+
+        function onDeviceReady() {
+            popup = false;
+            //initialise the app's font and themes
+            $('body').width(window.innerWidth);
+
+            //Now Load up this required script
+            prittyNote.loadScript('./js/AppFunctions.js', function() {
+                //App initialisation plug-in
+                AppFunctions.initiliaseApp();
+                statusShare.init();
+                $(window).initPrittyNote({
+                    pro: false
+                }); //if pro == true (load fullversion of app)
+
+                //centralise the canvas
+                $(document.getElementById(prittyNote.canvas)).css('margin-left', ($(window).width() - prittyNote.canvasSize) / 3)
+
+                //Resize the text area to fit in
+                $('<textarea>').css({
+                    width: $('<textarea>').parent().css('width')
+                })
+
+                //The Loader context to fit at the middle
+                $('.loading-container').css({
+                    marginTop: ($(window).height() - $('.loading-container').height()) / 2
+                })
+
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{"data":
+    {"palletes": [
+        {"name":"Cute Advice", "color":["ff216b","f2f2f2","61131b"]},
+        {"name":"A New Life", "color":["fe7e0cd","46b8b2","f99384"]},
+        {"name":"Alarming", "color":["fa023c","c8ff00","4b000f"]},
+        {"name":"Autumn Begins", "color":["c8ad66","7c2700","f1b85f"]},
+        {"name":"Beautiful Day", "color":["ccf390","ff003d","f7c41f"]},
+        {"name":"Best Friends", "color":["f1e9c2","8846be","983e26"]},
+        {"name":"Brownie", "color":["e6b173","91622a","803407"]},
+        {"name":"StickiNote", "color":["ffff8c","666666","cc0000"]},
+        {"name":"Chocolate Cream", "color":["a37e58","fbcfcf","fcfbe3"]},
+        {"name":"Cifuel", "color":["413e4a","b38184","f7e4be"]},
+        {"name":"Clean And Sleak", "color":["6c5041","ffffff","ffa136"]},
+        {"name":"Compatible", "color":["ff9e9d","2a2a2b","ff3d7f"]},
+        {"name":"Coffee Script", "color":["4a300a","f7e11e","fc760f"]},
+        {"name":"Confusion", "color":["f8ca00","8a9b0f","bd1550"]},
+        {"name":"Damn Good", "color":["a30006","ff4002","1c0113"]},
+        {"name":"Dream Street", "color":["cac8bc","eae5d2","f26882"]},
+        {"name":"Dream in Color", "color":["519548","bef202","eafde6"]},
+        {"name":"Eat Cake", "color":["f8ca00","774f38","e08e79"]},
+        {"name":"Evil Within", "color":["292929","999999","da0230"]},
+        {"name":"Exams", "color":["ebf2cf","90997c","0ff26a"]}
+    ],
+    "fonts": [
+        {"name":"Architects Daughter", "string":"30px 'Architects Daughter'", "font": "ArchitectsDaughter.ttf"},
+        {"name":"Amarante", "string": "30px 'Amarante'", "font": "Amarante-Regular.ttf"},
+        {"name":"Arvo Latin", "string":"30px 'Arvo'", "font": "Arvo-Regular.ttf"},
+        {"name":"Averia Sans Libre", "string":"30px 'Averia Sans Libre'", "font": "AveriaSansLibre-Regular.ttf"},
+        {"name":"Cabin Sketch", "string":"30px 'Cabin Sketch'", "font": "CabinSketch-Regular.ttf"},
+        {"name":"Crafty Girls", "string":" 30px 'Crafty Girls'", "font": "CraftyGirls.ttf"},
+        {"name":"Combo", "string":"30px 'Combo'", "font": "Combo-Regular.ttf"},
+        {"name":"Comfortaa", "string":"30px 'Comfortaa'", "font": "Comfortaa-Regular.ttf"},
+        {"name":"Copse", "string":"30px 'Copse'", "font": "Copse-Regular.ttf"},
+        {"name":"Dancing Script", "string":"30px 'Dancing Script'", "font": "DancingScript-Regular.ttf"}	,
+        {"name":"Didact Gothic", "string":"30px 'Didact Gothic'", "font": "DidactGothic.ttf"},
+        {"name":"Dosis", "string": "40px 'Dosis'", "font": "Dosis-Light.ttf"},
+        {"name":"Delius Swash Caps", "string":"30px 'Delius Swash Caps'", "font": "DeliusSwashCaps-Regular.ttf"}
+    ]}
+}

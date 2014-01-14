@@ -1,0 +1,268 @@
+/**
+ * CSS STYLING FILE
+ * Created by Eugene Mutai
+ * Date: 6/2/13
+ * Time: 4:20 PM
+ * Description: 
+ */
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: local('Comfortaa Regular'), local('Comfortaa'), url('Comfortaa-Regular.ttf') format('truetype');
+}
+
+body{min-width: 320px; margin: auto; background-color: #fefefe; overflow: hidden;}
+body, html{font-family:"Comfortaa", cursive, sans-serif; font-size: 15px; font-weight: 500}
+a{text-decoration: none; cursor: pointer; display: block;}
+
+/******* Colors *******/
+.red{color:  #cc0000}
+.orange{color: #f39c12}
+.green{color: #2ecc71}
+.yellow{color: #f1c40f}
+.blue{color: #3498DB}
+.white{color: #fefefe}
+.grey{color: #7f8c8d}
+
+/****** Background colors *************/
+.red-bg{background:  #cc0000}
+.orange-bg{background: #f39c12}
+.green-bg{background: #2ecc71}
+.yellow-bg{background: #f1c40f}
+.blue-bg{background: #3498DB}
+.grey-bg{background: #7f8c8d}
+.black-bg{background: #000000}
+.purple-bg{background-color: #8e44ad}
+.pale-red{background-color: #e74c3c}
+
+/********* OTHER DEFAULTS ******/
+.line{position: fixed; top: 0; left: 0; height: 100%}
+.line img{height: 100%}
+.space{margin-top: 10%}
+.content{width: 80%; margin:auto}
+
+.left{float: left}
+.right{float: right}
+.padding{padding: 10px}
+.small-padding{padding: 5px}
+.faded{opacity: 0.4}
+.largetext{font-size: 1.5em; padding: 0; margin: 0}
+.br{margin: 15px}
+.clear{clear: both;}
+.span{width: 100px}
+.span-1{width: 200px}
+.span-2{width: 300px}
+.span-3{width: 400px}
+.span-4{width: 100%}
+.uppercase{text-transform: uppercase}
+
+.border{border-width: 3px; border-style: solid; border-radius: 10px}
+.curves{border-radius: 5px}
+.link{ cursor: pointer;}
+.hide{display: none}
+
+.normal{font-weight: normal}
+.paddingmargin{padding: 0; margin: 0}
+
+.content{position: fixed; left: 0; top: 0; z-index: 2; width: 100%; height: 100%; margin: 0; background: #fefefe}
+
+/**** HEADER OF APP *************/
+.header{color: #ffffff; background:  #cc0000; width: 100%;}
+.header table{width: 100%}
+.header table td{width: 15%; font-size: 1.7em; text-align: center;padding:0;margin: 0}
+.header table td.name{width: 50%; padding-right: 0}
+.header table td img{width: 80%; vertical-align: middle; padding-right: 2%}
+.header table td:active{background: #e74c3c}
+
+.header-progress{width: 100%; height: 0.5em; background-color: #000000; display: none}
+.header-progress .activity-progress{width: 100%; height: 100%; background-color: #02cc56}
+
+.activity-bar{width: 100%; background: #000000; opacity: 0.9; text-align: center}
+.activity-bar div{padding: 2%}
+#imagepath{text-align: center}
+
+/************** FOR THE CANVAS ****************/
+.canvas-container{padding: 10px 0px; width:100%; margin: 0}
+.demo-image{display: none}
+
+/*******  FONT CONTROL *********/
+.font-control{width: 100%; opacity: 0.8; display: block}
+.font-control table{width: 100%; margin: auto 0; background-color: #000000; padding: 1.5% 0}
+.font-control table td.one{width: 78%;}
+.font-control table td.two{width: 10%}
+.font-control div.close-font-slider{width: 100%}
+.font-control div.close-font-slider img{width: 100%;}
+
+/* the input field */
+.font-range-input{border:1px inset #ddd; font-size: 1.2em; margin: 2.5%; padding:3px 0; text-align:center;width: 90%; border-radius: 5px; font-weight: 500}
+
+/***** the input range field ****/
+.input-range{width: 95%; padding: 2.5%}
+.range-progress-bar{
+    width: 100%;height: 1em;
+    background: #2ecc71; /* Old browsers */
+    background: -moz-linear-gradient(top,  #2ecc71 1%, #02cc56 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#2ecc71), color-stop(100%,#02cc56)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #2ecc71 1%,#02cc56 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #2ecc71 1%,#02cc56 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #2ecc71 1%,#02cc56 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #2ecc71 1%,#02cc56 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ecc71', endColorstr='#02cc56',GradientType=0 ); /* IE6-9 */
+    border-radius: 0.15em;
+}
+
+.input-handler{
+    background:#fff url(../images/h30.png) repeat-x 0 0;
+    height: 24%;
+    width: 6%;
+    top: 8.5%;
+    left: 35%;
+    position:absolute;
+    z-index: 0;
+    display:block;
+    border:1px solid #000;
+    -moz-box-shadow:0 0 6px #000;
+    -webkit-box-shadow:0 0 6px #000;
+    border-radius: 5px;
+}
+
+/*** TEXT AREA **********/
+.overlay{position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; display: none}
+.blind{background: #000; opacity: 0.7;}
+
+.text-area{position: fixed; width: 95%; left: 2.5%; padding: 0; top: 10%; z-index: 6; background: #F9FFD0; display: none}
+
+.edit-container{background-color: #cc0000; height: auto; width: 100%; margin: auto}
+textarea{width:94%; margin: 0; padding: 2.8%; height: 250px; color: #7f8c8d; font-size: 25px; text-align: left; background: snow; font-weight: 400}
+
+.text-area > div > div{float: left; cursor: pointer; background: #cc0000; color: #ffffff;}
+.text-area div.buttons{width: 15%}
+.text-area div.spacer{width: 40%;}
+.pop-header > div > img{width: 100%}
+.pop-header > div:active{background: #e74c3c}
+
+.finish-edit{width: 100%; margin: auto; height: auto; background: #F9FFD0; font-weight: bold}
+.finish-edit a{float: left; display: block; width: 50%; text-align: center; padding: 4% 0%; margin: 0}
+
+/********** SIDEBAR UL *************/
+.utility{display: none}
+ul li{font-family: 'comfortaa';list-style-type: none; text-align: center; padding: 2% 0%; font-size: 24px; cursor: pointer}
+
+/***** PRITTYNOTE LOADER *********/
+.loading{display: block; position: fixed; z-index:10; top: 0; left: 0; width: 100%; height: 100%;
+    background: #ff0000; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ff0000 0%, #930000 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff0000), color-stop(100%,#930000)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ff0000 0%,#930000 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ff0000 0%,#930000 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ff0000 0%,#930000 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ff0000 0%,#930000 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#930000',GradientType=0 ); /* IE6-9 */
+}
+.loading{text-align: center}
+.loading p{padding: 5% 0%; color: #fefefe; font-weight: bold}
+.container{width: 90%; margin: auto; height: 1em;}
+.progress-bar{width: 100%; height: 100%; padding: 1px; margin: 0; border: #fefefe solid 2px;
+    border-radius: 5px}
+.show-app-progress{
+    width: 0%; height: 100%;
+    border-radius: 2.5px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+/********* SAVING DIALOG BOX ******/
+.app-mini-pop-up, .introduction{position: fixed; left: 2.5%; width: 95%; z-index: 6; background: #fefefe;}
+.app-mini-pop-up{top: 20%; height: auto; display: none}
+
+.app-mini-pop-up div{font-weight: bold; font-size: 1em;}
+.app-mini-pop-up div img{width: 20%; vertical-align: middle}
+
+/********** COLOR PICKER ***************/
+.color-picker{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #000; opacity: 0.9; z-index: 10; display: none}
+.finish-color-edit{width: 50%; text-align: center; margin: auto}
+.finish-color-edit > img{width: 33.33%; float: left}
+.finish-color-edit > img:first-child:active{background: #e74c3c;}
+.finish-color-edit > img:last-child:active{background: #3498DB;}
+.finish-color-edit > img:active{background: #2ecc71;}
+
+.color-picker .color-parts{width: 100%; color: white; position: fixed; bottom: 0; left: 0; text-align: center}
+.color-picker .color-parts > div{width: 100%; padding: 5% 0%}
+.color-picker .color-parts .color-input{width: 100%; margin: auto}
+.color-picker .color-parts .color-choices > div{float: left; width: 33.333%; padding: 2% 0%}
+
+.wrapped-canvas{width: 100%; position: absolute; top: 20%; left: 0; z-index: 100}
+
+/***************** STATUS SEARCH *************/
+.status-search{position: fixed; left: 2.5%; width: 95%; z-index: 10; height: 95%; top: 2.5%; background: #fefefe; display: none;}
+.status-search table{width: 100%;}
+.status-search table td{width: 15%}
+.status-search table td.spacer{width: 55%}
+.status-search table td img{width: 100%}
+.status-search table td:active{background: #e74c3c;}
+
+.status-search .spacer input{background: #cc0000; border: none; border-bottom: 1px solid #fefefe; width: 100%; overflow: hidden; padding: 3% 0%; color: #fefefe; font-family: "comfortaa"; font-size: 1.2em}
+
+#search-wrapper{position: relative; top: 1%; left: 0; overflow:auto; opacity: 1; width: 100%; height: 82%;}
+
+/******************* STYLING OF THE STATUSES *****************/
+ul#stuff{padding: 0; margin: 0; width: 100%;}
+ul#stuff li{width: 90%; padding: 2%; margin: 3% 2%; list-style-type: none; background: #fefefe; border: 1px solid #bbbbb6; font-size: 1.3em; text-align: left}
+ul#stuff li:hover{background: #fffdc7}
+ul#stuff a{text-decoration: none; color: #262626; display: block; cursor: pointer}
+
+ul#stuff li.resultset{background: #fffdc7;}
+ul#stuff li.noresults p{text-align: center;}
+.resultset b{color: #cc0000}
+
+.quote b{color: #cc0000;}
+h4.quote b{color: #00cc00}
+
+.status-footer{text-align: center; color: #262626; background: #fefefe; border: 1px solid #bbbbb6;}
+.status-footer p{padding: 1%; margin: 0; font-weight: bolder; font-size: 1.4em}
+.counter{background: #fffdc7; padding-bottom: 2%;}
+.counter span{color: #cc0000;}
+.status-activity{text-align: center}
+
+/********** INTRODUCTION ***************/
+.introduction{top: 2.5%; height: 95%; display: none}
+.introduction > div{text-align: left; width: 94%; padding: 2%; background: #fefefe;}
+.introduction h3, span{color: #cc0000}
+.introduction h3, p{padding: 0; margin:0}
+.introduction p{color: #262626}
+
+.intro-bar{width: 100%; background: #cc0000;}
+.intro-bar td{width: 15%}
+.intro-bar .spacer{width: 70%}
+.intro-bar td img{width: 100%}
+.intro-bar td:active{background: #e74c3c}
+
+.intro-content{position: relative; top: 1%; left: 0; overflow:auto; opacity: 1; width: 100%; height: 82%;}
+.intro-content div#scroll > div{width: 90%; padding: 3%; margin: 2% 0%; color: #262626; font-size: 1em; text-align: justify; border: 1px solid #dddddd; font-weight: 500;}
+.intro-content div#scroll > div > p{color: #262626}
+
+/********** IMAGE CROPING *******/
+.load-image{width: 100%;}
+.load-image img{width: auto; height: auto; overflow: hidden}
+
+.load-image .finish-crop{width: 50%; text-align: center; position: fixed; bottom: 0; left: 25%; z-index: 1000; display: none}
+.load-image .finish-crop > img{width: 50%; float: left;}
+.load-image .finish-crop > img:first-child:active{background: #e74c3c;}
+.load-image .finish-crop > img:active{background: #2ecc71;}
+
+/**************** THE FOOTER MENU ***************/
+.footer{width: 100%; position: fixed; bottom: 0; left: 0; background-color: #000000; z-index: 2}
+.footer-menu .footer-icon-menu a{float: left; width: 16.6667%; padding: 5px 0; text-align: center}
+.footer-menu .footer-icon-menu img{width: 80%}
+
+/*
+.footer-menu .footer-image-gallery{background: #000000}
+.footer-menu .footer-image-gallery div{float: left; width: 24%; padding: 0; margin: 0; cursor: pointer}
+.footer-image-gallery div img{width: 98%}
+*/
