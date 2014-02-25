@@ -124,172 +124,15 @@ var AppFunctions = {
         return randomstring;
     },
 
-    //collect basic information about the user
-    initCollectUserData: function() {
-        var user = new Object();
-
-        user.device = {
-            model: device.model,
-            platform: device.platform,
-            version: device.version,
-            uuid: device.uuid || "",
-            imei: blackberry.identity.IMEI,
-            verified: false
-        }
-        console.log(user.device);
-
-        //Stringyfy the data and store it
-        var userData  = JSON.stringify(user);
-        if(localStorage) { //check 4 localstorage, cookies as fallback
-            //now check to see if the user's data exist
-            if(localStorage.getItem(AppFunctions.userData)) {
-                AppFunctions.verifyUser();
-            }else{ //it doesnt so set it and fech his Geo data
-                localStorage.setItem(AppFunctions.userData, userData);
-                AppFunctions.geoLocateUser();
-            }
-        }else{ //Use cookies instead
-            //If we had ever saved the user's data before
-            if($.cookie(AppFunctions.userData)) {
-                AppFunctions.verifyUser();
-            }else{
-                $.cookie(AppFunctions.userData, userData);
-                AppFunctions.geoLocateUser();
-            }
-        }
-
-    },
-
-    //http://maps.google.com/maps/api/geocode/json?latlng=-1.2922417,36.8991335&sensor=true
-    geoLocateUser: function() {
-        var location = '', coords = {};
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                    //console.log(position)
-                    $.get(AppFunctions.URL.app + "app/geolocate.php",
-                        {latlng: position.coords.latitude + ',' + position.coords.longitude, sensor: "true"},
-                        function(m) {
-                            if(m.results.length > 0) {
-                                if(m.results.length > 1) location = m.results[1].formatted_address;
-                                else location = m.results[0].formatted_address;
-                            }
-
-                            coords = {
-                                lat: position.coords.latitude,
-                                long: position.coords.longitude,
-                                location: location
-                            }
-
-                            if(localStorage) {
-                                localStorage.setItem("userLocationData", JSON.stringify(coords))
-                            }else{
-                                $.cookie('userLocationData', JSON.stringify(coords))
-                            }
-
-                            //now head on to verify the person
-                            AppFunctions.verifyUser();
-                            console.log("User's location: " + location)
-                        }, "json")
-                },
-                function(e) {
-                    switch(e.code) {
-                        case e.PERMISSION_DENIED:
-                            //if permission was denied
-                            break
-                        case e.POSITION_UNAVAILABLE:
-                            //if javascript failed to acquire the coordinates
-                            break
-                        case e.TIMEOUT:
-                            //if the request timed out, do the request again
-                            AppFunctions.geoLocateUser();
-                            break
-                    }
-                    //alert("Error Occured: " + e.message)
-                },
-                {enableHighAccuracy: true, timeout: 30000, maximumAge: 2000*60*60}
-            )
-            //timeout after 30 secs, and get pos which is not older than 2 hrs
-        }
-        //return statusShare.data
-    },
-
-    verifyUser: function() {
-        if(localStorage) {
-            //If the user's data already exist
-            if(localStorage.getItem(AppFunctions.userData)) {
-                //If the user's location exists
-                if(localStorage.getItem("userLocationData")) {
-                    var user = {
-                        phone: JSON.parse(localStorage.getItem(AppFunctions.userData)),
-                        geo: JSON.parse(localStorage.getItem("userLocationData"))
-                    }
-                    //verify the user
-                    AppFunctions.verify(user)
-                }else{  //if geo-location data ds exist, get it 1st
-                    AppFunctions.geoLocateUser();
-                }
-            }else{ //If no user data exists at all
-                AppFunctions.initCollectUserData();
-            }
-        }else{
-            //COOKIES FALLBACK
-            if($.cookie(AppFunctions.userData)) {
-                if($.cookie("userLocationData")) {
-                    var user = {
-                        phone: JSON.parse($.cookie(AppFunctions.userData)),
-                        geo: JSON.parse($.cookie("userLocationData"))
-                    }
-                    AppFunctions.verify(user)
-                }else{
-                    AppFunctions.geoLocateUser();
-                }
-            }else{
-                AppFunctions.initCollectUserData();
-            }
-        }
-    },
-
-    verify: function(user) {
-        if(!user.phone.verified) {
-            $.get(AppFunctions.URL.verify, user, function(res) {
-                if(res.success == 1) {
-                    console.log('The response from the server: ' + res.verified);
-                    switch(res.verified) {
-                        case 1: //if the user was successfully verified
-                            var dt = new Date()
-                            var time = dt.toLocaleTimeString();
-                            var date = dt.toLocaleDateString();
-                            var fulldate = date + " " + time;
-
-                            user.phone.date = fulldate;
-                            user.phone.verified = res.verified;
-                            //Update the user' data in the phone storage
-                            localStorage.setItem(AppFunctions.userData, JSON.stringify(user.phone));
-                            break;
-                        case 2: //if the user was already verified
-                            blackberry.ui.toast.show('If you like the app, do let your friends know, there are statuses enough for everybody :)');
-                             //ask user to keep sharing the app
-                            console.log('The user was already verified at ' + user.phone.date);
-                            break;
-                    }
-                }else{
-                    //an error occurred try again after a lil while
-                    setTimeout(statusShare.verify(user), 10000);
-                }
-            }, "json")
-        }else{
-            console.log(user)
-            console.log("The user was verified at -- " + user.phone.date)
-        }
-    },
-
     //initialising the App
     initiliaseApp: function() {
-        AppFunctions.verifyUser();
+        // AppFunctions.verifyUser();
+
         //If the user taps the search buttorn, pop up the text editor
         document.addEventListener("searchbutton", function() {
             $('a[data-action="edit"]').trigger('touch');
         }, false);
+
         //If the user taps menu button, prompt the user to save the image
         document.addEventListener('menubutton', function() {
             $('a[data-action="download"]').trigger('touch');
@@ -331,6 +174,8 @@ var AppFunctions = {
                 })
             }
         });
+
+        //Create FONTS sidebar menu
         $('.side-bar-fonts').sidr({
             name: 'side-bar-fonts',
             side: 'right',

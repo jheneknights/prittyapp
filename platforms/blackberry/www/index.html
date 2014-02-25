@@ -150,7 +150,9 @@
                     <div class="status-footer counter" data-id="app-counter">
                         <h3>need a status to update?
                             <br/>we've got
-                            <span class="ftcounter">thousands</span>statuses for you to chose from.<a class="green-bg white small-padding" href="https://play.google.com/store/apps/details?id=com.statusshare"> Download  StatusShare</a> 
+                            <span class="ftcounter">thousands</span> statuses for you to chose from.
+                            <!-- Not allowed in blackberry -->
+                            <!-- <a class="green-bg white small-padding" href="https://play.google.com/store/apps/details?id=com.statusshare"> Download StatusShare</a> --> 
                         </h3>
                     </div>
                 </div>
@@ -411,12 +413,20 @@
 
     <script>
         //check when App is fully initiated
-        document.addEventListener('webworksready', onDeviceReady, false)
+        document.addEventListener('webworksready', function() {
+            document.addEventListener('deviceready', onDeviceReady, false)
+        }, false)
 
          //when everything in  cordova is ready
-
         function onDeviceReady() {
             popup = false;
+
+            //lock the orientation to potrait
+            blackberry.app.lockOrientation ("portrait-primary");
+            console.log(blackberry.app.orientation);
+
+            $.support.cors = true; //CORS support init
+
             //initialise the app's font and themes
             $('body').width(window.innerWidth);
 
@@ -425,8 +435,9 @@
                 //App initialisation plug-in
                 AppFunctions.initiliaseApp();
                 statusShare.init();
+
                 $(window).initPrittyNote({
-                    pro: false
+                    pro: true
                 }); //if pro == true (load fullversion of app)
 
                 //centralise the canvas
